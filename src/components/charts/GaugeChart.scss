@@ -1,0 +1,13 @@
+
+.gauge-container {
+  display: flex;
+  width: auto;
+  height: auto;
+  margin: 30px;
+
+  .current-value {
+    fill: black !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+  }
+}

@@ -14,7 +14,7 @@ function Monitor() {
     setOnOff(!onOff);
   };
   return (
-    <div className="container">
+    <div className="monitor-container">
       <InputNumber
         min={0}
         defaultValue={Number}

@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { Select } from "antd";
+import { Select, Button } from "antd";
+
 import "./Display.scss";
+import { Power } from "../charts/GaugeChart";
 
 const { Option } = Select;
 
 function Display() {
   const [keyValue, setKeyValue] = useState("");
+
   const handleChange = (value) => {
     setKeyValue(value);
+  };
+
+  const handleSubmitButton = () => {
+    console.log("Data submit", keyValue);
   };
   return (
     <div className="container">
@@ -23,6 +30,14 @@ function Display() {
       <div className="key-value">
         <label className="label">Key value: </label>
         {keyValue ? keyValue : "Chưa chọn key value"}
+      </div>
+      <div className="submit-button">
+        <Button onClick={() => handleSubmitButton()} type="primary">
+          Xem
+        </Button>
+      </div>
+      <div className="charts">
+        <Power />
       </div>
     </div>
   );
