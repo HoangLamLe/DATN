@@ -1,9 +1,6 @@
-
 .gauge-container {
   display: flex;
-  width: auto;
-  height: auto;
-  margin: 30px;
+  justify-content: center;
 
   .current-value {
     fill: black !important;
