@@ -7,8 +7,7 @@ import { Menu } from "antd";
 import "antd/dist/antd.css";
 import "./App.scss";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import Content from "./components/Content";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -21,7 +20,7 @@ function getItem(label, key, icon, children, type) {
 }
 
 const items = [
-  getItem("Trang chủ", "/", <HomeOutlined />),
+  getItem("Trang chủ", "/home", <HomeOutlined />),
   getItem("Hiển thị", "/display", <DesktopOutlined />),
   getItem("Điều khiển", "/monitor", <ContainerOutlined />),
 ];
@@ -31,7 +30,7 @@ const App = () => {
     setKey(location.pathname);
   }, []);
 
-  const [key, setKey] = useState("/");
+  const [key, setKey] = useState("/home");
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,7 +49,7 @@ const App = () => {
         theme="dark"
         items={items}
       />
-      <Content />
+      <Outlet />
     </div>
   );
 };
