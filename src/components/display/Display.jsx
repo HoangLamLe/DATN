@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Select, Button, Modal } from "antd";
+import { Select, Button, Modal, message, Popconfirm } from "antd";
 
 import "./Display.scss";
 import { Power } from "../charts/GaugeChart";
@@ -25,6 +25,11 @@ function Display() {
     if (!keyValue) return;
     setIsSubmit(true);
   };
+
+  const onConfirm = () => {
+    if (!keyValue) return;
+    localStorage.setItem("viewer", keyValue);
+  };
   return (
     <div className="container">
       <Select
@@ -49,6 +54,16 @@ function Display() {
         >
           Xem
         </Button>
+        <Popconfirm
+          title={<div>Bạn có chắc chặn chọn {keyValue} để user xem</div>}
+          onConfirm={onConfirm}
+          okText="Chắc chắn"
+          cancelText="Huỷ"
+        >
+          <Button disabled={!keyValue} type="primary" className="btn-set-view">
+            Chọn keyValue user được xem
+          </Button>
+        </Popconfirm>
       </div>
       <div className="charts">
         <Modal

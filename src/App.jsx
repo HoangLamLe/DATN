@@ -2,8 +2,9 @@ import {
   ContainerOutlined,
   DesktopOutlined,
   HomeOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Menu, Modal } from "antd";
 import "antd/dist/antd.css";
 import "./App.scss";
 import React, { useEffect, useState } from "react";
@@ -23,6 +24,7 @@ const items = [
   getItem("Trang chủ", "/home", <HomeOutlined />),
   getItem("Hiển thị", "/display", <DesktopOutlined />),
   getItem("Điều khiển", "/monitor", <ContainerOutlined />),
+  getItem("Đăng xuất", "/", <LogoutOutlined />),
 ];
 
 const App = () => {
@@ -31,16 +33,25 @@ const App = () => {
   }, []);
 
   const [key, setKey] = useState("/home");
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleLogout = () => {
+    setIsOpenModal(true);
+  };
 
   return (
     <div className="container" style={{ display: "flex" }}>
       <Menu
         style={{ width: "16vw", height: "100vh" }}
         onClick={({ key }) => {
-          if (key) {
+          if (key === "/") {
+            handleLogout();
+            return;
+          }
+          if (key && key !== "/") {
             navigate(key);
           }
         }}
@@ -50,6 +61,16 @@ const App = () => {
         items={items}
       />
       <Outlet />
+      <Modal
+        open={isOpenModal}
+        onCancel={() => setIsOpenModal(false)}
+        onOk={() => navigate("/")}
+        okText="Chắc chắn"
+        cancelText="Huỷ"
+        width="50vw"
+      >
+        Bạn có chắc chắn muốn đăng xuất
+      </Modal>
     </div>
   );
 };
