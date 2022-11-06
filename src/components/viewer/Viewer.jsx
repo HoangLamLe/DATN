@@ -25,14 +25,6 @@ function Viewer() {
 
   return (
     <div className="viewer-container">
-      {value === "Độ ẩm" && <HumidBarChart />}
-      {value === "Nhiệt độ" && <Power />}
-      {value === "Lượng mưa" && <BarChart />}
-      {!value && (
-        <>
-          <Empty description="Chưa có dữ liệu hoặc quản trị viên chưa cài đặt giá trị được xem bởi user" />
-        </>
-      )}
       <div className="viewer-log-out">
         <Popconfirm
           title="Bạn có muốn đăng xuất không"
@@ -44,6 +36,16 @@ function Viewer() {
             Đăng xuất
           </Button>
         </Popconfirm>
+      </div>
+      <div className="viewer-content">
+        {value === "Độ ẩm" && <HumidBarChart />}
+        {value === "Nhiệt độ" && <Power />}
+        {value === "Lượng mưa" && <BarChart />}
+        {!value && (
+          <>
+            <Empty description="Chưa có dữ liệu hoặc quản trị viên chưa cài đặt giá trị được xem bởi user" />
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,20 @@
 .viewer-container {
+  width: 94vw;
+  margin: 0 3vw;
+
+  .viewer-content {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    min-height: 60vh;
+    background-color: rgb(191, 214, 223);
+    margin: 0 auto 10px auto;
+  }
+
   .viewer-log-out {
-    width: 100vw;
-    margin-top: 20vh;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 10px;
     display: flex;
     justify-content: center;
   }
