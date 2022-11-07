@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 import schema from "./schema";
 
@@ -21,9 +22,11 @@ function LoginScreen() {
   const onSubmitHandler = (data) => {
     if (!data) return;
     if (data.user === "admin") {
+      message.success("Đăng nhập thành công với tư cách admin");
       navigate("/home");
     }
     if (data.user === "user") {
+      message.success("Đăng nhập thành công với tư cách user");
       navigate("/viewer");
     }
   };
