@@ -7,20 +7,23 @@ import { Power } from "../charts/GaugeChart";
 import BarChart from "../charts/BarChart";
 import HumidBarChart from "../charts/HumidBarChart";
 
+import { getLocalStorage, removeLocalStorage } from "../../utils";
+
 import "./Viewer.scss";
 
 function Viewer() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const keyValue = localStorage.getItem("viewer");
+    const keyValue = getLocalStorage("viewer");
     setValue(keyValue);
   }, []);
 
   const [value, setValue] = useState("");
 
-  const onConfirmLogOut = () => {
-    navigate("/");
+  const onConfirmLogOut = async () => {
+    await removeLocalStorage("role");
+    await navigate("/");
   };
 
   return (

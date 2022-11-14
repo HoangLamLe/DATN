@@ -9,6 +9,7 @@ import "antd/dist/antd.css";
 import "./App.scss";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { removeLocalStorage } from "./utils";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -64,7 +65,10 @@ const App = () => {
       <Modal
         open={isOpenModal}
         onCancel={() => setIsOpenModal(false)}
-        onOk={() => navigate("/")}
+        onOk={async () => {
+          await removeLocalStorage("role");
+          await navigate("/");
+        }}
         okText="Chắc chắn"
         cancelText="Huỷ"
         width="50vw"

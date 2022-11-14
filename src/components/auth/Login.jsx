@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
+import { Await, useNavigate } from "react-router-dom";
 import { message } from "antd";
 
 import schema from "./schema";
+import { setLocalStorage } from "../../utils";
 
 import { Container, FormItem, Form, SubmitItem } from "./styled.js";
 
@@ -19,15 +20,17 @@ function LoginScreen() {
     resolver: yupResolver(schema()),
   });
 
-  const onSubmitHandler = (data) => {
+  const onSubmitHandler = async (data) => {
     if (!data) return;
     if (data.user === "admin") {
+      await setLocalStorage("role", "admin");
+      await navigate("/home");
       message.success("Đăng nhập thành công với tư cách admin");
-      navigate("/home");
     }
     if (data.user === "user") {
+      await setLocalStorage("role", "user");
+      await navigate("/viewer");
       message.success("Đăng nhập thành công với tư cách user");
-      navigate("/viewer");
     }
   };
 
