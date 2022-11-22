@@ -8,6 +8,10 @@ function Home() {
   const { categories, isLoading, fetchCategoriesFunc } = useCategories();
   console.log("categories", categories?.data?.entries);
   console.log("loading", isLoading);
+  const rain = categories?.data?.entries?.map(
+    (item) => JSON.parse(item.objectJSON).Rain
+  );
+  console.log("rain", rain);
 
   const [token, setToken] = React.useState("");
   const [existToken, setExistToken] = React.useState(
@@ -56,7 +60,7 @@ function Home() {
             Nhập token để lấy được dữ liệu cần thiết
           </Button>
           <div className="exist-token">
-            Token đang được sử dụng là: {existToken}
+            Token đang được sử dụng là: {existToken || "Chưa có token được lưu"}
           </div>
           <Button type="primary" onClick={handleTestAPI}>
             Test thử API
