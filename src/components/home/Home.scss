@@ -1,9 +1,22 @@
 .home-container {
-  display: block;
+  display: flex;
+  padding: 20px;
+  justify-content: center;
   text-align: center;
   width: 100%;
   height: 100vh;
   background-image: url("../../assets/background-home.png");
   background-repeat: no-repeat;
   background-size: cover;
+
+  .home-title {
+    flex: 100%;
+  }
+
+  .exist-token {
+    margin-top: 20px;
+    background-color: white;
+    inline-size: 100%;
+    overflow-wrap: break-word;
+  }
 }
