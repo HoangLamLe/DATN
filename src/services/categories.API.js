@@ -1,8 +1,8 @@
-import { axiosInstance } from './API';
-import { CATEGORIES } from './constants';
+import { getLocalStorage } from "../utils";
+import { axiosInstance } from "./API";
 
 async function fetchCategories(params) {
-  return await axiosInstance.get(CATEGORIES.FETCH_CATEGORIES, {
+  return await axiosInstance.get(getLocalStorage("API"), {
     params,
   });
 }

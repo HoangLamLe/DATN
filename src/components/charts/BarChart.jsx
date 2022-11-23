@@ -71,10 +71,16 @@ export default function BarChart() {
   console.log("loading", isLoading);
 
   return (
-    <Bar
-      options={options}
-      data={data}
-      fallbackContent={<>Chưa có dữ liệu từ API</>}
-    />
+    <>
+      {rain || rainOBS ? (
+        <Bar
+          options={options}
+          data={data}
+          fallbackContent={<>Chưa có dữ liệu từ API</>}
+        />
+      ) : (
+        <>Không có dữ liệu từ API</>
+      )}
+    </>
   );
 }

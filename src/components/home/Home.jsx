@@ -1,4 +1,4 @@
-import { Button, Col, Input, message, Row } from "antd";
+import { Button, Col, Divider, Input, message, Row } from "antd";
 import React from "react";
 import { useCategories } from "../../hooks/useCategories";
 import { getLocalStorage, setLocalStorage } from "../../utils";
@@ -14,12 +14,20 @@ function Home() {
   console.log("rain", rain);
 
   const [token, setToken] = React.useState("");
+  const [API, setAPI] = React.useState("");
   const [existToken, setExistToken] = React.useState(
     getLocalStorage("USER_TOKEN")
   );
+  const [existAPI, setExistAPI] = React.useState(getLocalStorage("API"));
 
   const handleTokenChange = (e) => {
     setToken(e.target.value);
+
+    console.log(e.target.value);
+  };
+
+  const handleAPIChange = (e) => {
+    setAPI(e.target.value);
 
     console.log(e.target.value);
   };
@@ -36,10 +44,24 @@ function Home() {
     location.reload();
   };
 
+  const handleSetAPI = () => {
+    if (!API) {
+      message.error("Chưa có url API trong ô input");
+      return;
+    }
+
+    setLocalStorage("API", API);
+    setExistAPI(API);
+    message.success("Nhập url API thành công");
+    location.reload();
+  };
+
   const handleTestAPI = async () => {
     await fetchCategoriesFunc();
     if (categories?.data?.entries === undefined) {
-      await message.error("API chưa trả về dữ liệu, đề nghị nhập đúng token");
+      await message.error(
+        "API chưa trả về dữ liệu, đề nghị nhập đúng token và url API"
+      );
       return;
     }
     await message.success("API trả về dữ liệu thành công");
@@ -50,6 +72,19 @@ function Home() {
       <Row>
         <Col span={24}>
           <h1 className="home-title">Welcome to IOT web app</h1>
+          <Input
+            placeholder="Nhập url API"
+            value={API}
+            onChange={handleAPIChange}
+          ></Input>
+
+          <Button type="primary" onClick={handleSetAPI}>
+            Nhập url API để lấy được dữ liệu cần thiết
+          </Button>
+          <div className="exist-token">
+            url API đang được sử dụng là: {existAPI || "Chưa có token được lưu"}
+          </div>
+          <Divider></Divider>
           <Input
             placeholder="Nhập token"
             value={token}
