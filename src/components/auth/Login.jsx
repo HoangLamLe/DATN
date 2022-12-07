@@ -36,6 +36,7 @@ function LoginScreen() {
 
   return (
     <Container>
+      <h1>Hệ thống nền tảng IoT</h1>
       <Form onSubmit={handleSubmit(onSubmitHandler)}>
         <h1 className="form-title">Đăng nhập</h1>
         <FormItem>

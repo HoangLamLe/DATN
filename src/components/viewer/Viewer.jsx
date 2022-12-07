@@ -16,10 +16,13 @@ function Viewer() {
 
   useEffect(() => {
     const keyValue = getLocalStorage("viewer");
+    const existHeader = getLocalStorage("header");
     setValue(keyValue);
+    setHeader(existHeader);
   }, []);
 
   const [value, setValue] = useState("");
+  const [header, setHeader] = useState("");
 
   const onConfirmLogOut = async () => {
     await removeLocalStorage("role");
@@ -28,6 +31,9 @@ function Viewer() {
 
   return (
     <div className="viewer-container">
+      <h1 className="viewer-header">
+        {header ? header : "Tên hệ thống chưa được admin thiết lập"}
+      </h1>
       <div className="viewer-log-out">
         <Popconfirm
           title="Bạn có muốn đăng xuất không"
@@ -42,8 +48,8 @@ function Viewer() {
       </div>
       <div className="viewer-content">
         {value === "Độ ẩm" && <HumidBarChart />}
-        {value === "Nhiệt độ" && <Power />}
-        {value === "Lượng mưa" && <BarChart />}
+        {value === "gauge" && <Power />}
+        {value === "bar" && <BarChart />}
         {!value && (
           <>
             <Empty description="Chưa có dữ liệu hoặc quản trị viên chưa cài đặt giá trị được xem bởi user" />

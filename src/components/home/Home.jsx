@@ -15,10 +15,14 @@ function Home() {
 
   const [token, setToken] = React.useState("");
   const [API, setAPI] = React.useState("");
+  const [header, setHeader] = React.useState("");
   const [existToken, setExistToken] = React.useState(
     getLocalStorage("USER_TOKEN")
   );
   const [existAPI, setExistAPI] = React.useState(getLocalStorage("API"));
+  const [existHeader, setExistHeader] = React.useState(
+    getLocalStorage("header")
+  );
 
   const handleTokenChange = (e) => {
     setToken(e.target.value);
@@ -28,6 +32,12 @@ function Home() {
 
   const handleAPIChange = (e) => {
     setAPI(e.target.value);
+
+    console.log(e.target.value);
+  };
+
+  const handleHeaderChange = (e) => {
+    setHeader(e.target.value);
 
     console.log(e.target.value);
   };
@@ -56,6 +66,18 @@ function Home() {
     location.reload();
   };
 
+  const handleSetHeader = () => {
+    if (!header) {
+      message.error("Chưa có tên hệ thống trong ô input");
+      return;
+    }
+
+    setLocalStorage("header", header);
+    setExistHeader(header);
+    message.success("Nhập tên hệ thống thành công");
+    location.reload();
+  };
+
   const handleTestAPI = async () => {
     await fetchCategoriesFunc();
     if (categories?.data?.entries === undefined) {
@@ -71,8 +93,10 @@ function Home() {
     <div className="home-container">
       <Row>
         <Col span={24}>
-          <h1 className="home-title">Welcome to IOT web app</h1>
+          <h1 className="home-title">Kết nối với hệ thống IoT</h1>
+          <h2>Thiết lập API, Token và Tên hệ thống</h2>
           <Input
+            className="input"
             placeholder="Nhập url API"
             value={API}
             onChange={handleAPIChange}
@@ -86,6 +110,7 @@ function Home() {
           </div>
           <Divider></Divider>
           <Input
+            className="input"
             placeholder="Nhập token"
             value={token}
             onChange={handleTokenChange}
@@ -100,6 +125,21 @@ function Home() {
           <Button type="primary" onClick={handleTestAPI}>
             Test thử API
           </Button>
+          <Divider></Divider>
+          <Input
+            className="input"
+            placeholder="Nhập tên hệ thống IoT"
+            value={header}
+            onChange={handleHeaderChange}
+          ></Input>
+
+          <Button type="primary" onClick={handleSetHeader}>
+            Nhập vào tên hệ thống IoT
+          </Button>
+          <div className="exist-token">
+            Tên hệ thống IoT hiện tại:{" "}
+            {existHeader || "Chưa có tên hệ thống được lưu"}
+          </div>
         </Col>
       </Row>
     </div>
