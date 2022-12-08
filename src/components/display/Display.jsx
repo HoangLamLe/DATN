@@ -78,7 +78,7 @@ function Display() {
             <Option value="line">Biểu đồ dạng đường thẳng</Option>
             <Option value="bar">Biểu đồ cột</Option>
             <Option value="pie">Biểu đồ hình tròn</Option>
-            {/* <Option value="scatter">Biểu đồ dạng tán</Option> */}
+            <Option value="scatter">Biểu đồ dạng tán</Option>
           </Select>
           <div>Nhập các key muốn hiển thị</div>
           <Input

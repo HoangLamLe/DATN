@@ -26,6 +26,11 @@ ChartJS.register(
 
 const options = {
   responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+    },
+  },
   plugins: {
     legend: {
       position: "top",

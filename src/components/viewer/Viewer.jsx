@@ -7,6 +7,7 @@ import { Power } from "../charts/GaugeChart";
 import BarChart from "../charts/BarChart";
 import LineChart from "../charts/LineChart";
 import PieChart from "../charts/PieChart";
+import ScatterChart from "../charts/ScatterChart";
 
 import { getLocalStorage, removeLocalStorage } from "../../utils";
 
@@ -52,6 +53,7 @@ function Viewer() {
         {value === "gauge" && <Power />}
         {value === "bar" && <BarChart />}
         {value === "pie" && <PieChart />}
+        {value === "scatter" && <ScatterChart />}
         {!value && (
           <>
             <Empty description="Chưa có dữ liệu hoặc quản trị viên chưa cài đặt giá trị được xem bởi user" />

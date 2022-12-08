@@ -42,15 +42,16 @@ export default function ScatterChart() {
   const labels = categories?.data?.entries?.map(
     (item) => JSON.parse(item.objectJSON)[key2]
   );
-  let data = {
+  const fakeData = Array.from({ length: rain.length }, (item, index) => ({
+    y: rain[index],
+    x: labels[index],
+  }));
+  const data = {
     datasets: [
       {
-        label: "Giá trị",
-        data: Array.from({ length: 100000 }, () => ({
-          x: rain,
-          y: labels,
-        })),
-        backgroundColor: "blue",
+        label: `Giá trị của key: ${key}`,
+        data: fakeData,
+        backgroundColor: "#1890ff",
       },
     ],
   };
