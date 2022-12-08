@@ -1,26 +1,11 @@
 import React from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
 
 import { useCategories } from "../../hooks/useCategories";
 import { getLocalStorage } from "../../utils";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const options = {
   responsive: true,
@@ -30,12 +15,12 @@ const options = {
     },
     title: {
       display: true,
-      text: "Biểu đồ cột",
+      text: "Biểu đồ hình tròn",
     },
   },
 };
 
-export default function BarChart() {
+export default function PieChart() {
   const { categories, isLoading, fetchCategoriesFunc } = useCategories();
   const key = getLocalStorage("key").toString();
   const key2 = getLocalStorage("key2").toString();
@@ -65,7 +50,7 @@ export default function BarChart() {
   return (
     <>
       {rain || labels ? (
-        <Bar
+        <Pie
           options={options}
           data={data}
           fallbackContent={<>Chưa có dữ liệu từ API</>}

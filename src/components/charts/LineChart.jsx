@@ -3,12 +3,13 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 
 import { useCategories } from "../../hooks/useCategories";
 import { getLocalStorage } from "../../utils";
@@ -16,7 +17,8 @@ import { getLocalStorage } from "../../utils";
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
@@ -30,12 +32,12 @@ const options = {
     },
     title: {
       display: true,
-      text: "Biểu đồ cột",
+      text: "Biểu đồ dạng đường thẳng",
     },
   },
 };
 
-export default function BarChart() {
+export default function LineChart() {
   const { categories, isLoading, fetchCategoriesFunc } = useCategories();
   const key = getLocalStorage("key").toString();
   const key2 = getLocalStorage("key2").toString();
@@ -65,7 +67,7 @@ export default function BarChart() {
   return (
     <>
       {rain || labels ? (
-        <Bar
+        <Line
           options={options}
           data={data}
           fallbackContent={<>Chưa có dữ liệu từ API</>}

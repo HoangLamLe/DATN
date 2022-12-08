@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 import { Power } from "../charts/GaugeChart";
 import BarChart from "../charts/BarChart";
-import HumidBarChart from "../charts/HumidBarChart";
+import LineChart from "../charts/LineChart";
+import PieChart from "../charts/PieChart";
 
 import { getLocalStorage, removeLocalStorage } from "../../utils";
 
@@ -47,9 +48,10 @@ function Viewer() {
         </Popconfirm>
       </div>
       <div className="viewer-content">
-        {value === "Độ ẩm" && <HumidBarChart />}
+        {value === "line" && <LineChart />}
         {value === "gauge" && <Power />}
         {value === "bar" && <BarChart />}
+        {value === "pie" && <PieChart />}
         {!value && (
           <>
             <Empty description="Chưa có dữ liệu hoặc quản trị viên chưa cài đặt giá trị được xem bởi user" />

@@ -29,6 +29,7 @@ export function Power() {
           needleHeightRatio={0.9}
           paddingVertical={15}
           forceRender={true}
+          currentValueText={key}
         />
       ) : (
         <>Không có dữ liệu từ API ! Hãy nhập đúng key</>

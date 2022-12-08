@@ -1,41 +1,38 @@
 import React from "react";
 import {
   Chart as ChartJS,
-  CategoryScale,
   LinearScale,
-  BarElement,
-  Title,
+  PointElement,
+  LineElement,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Scatter } from "react-chartjs-2";
 
 import { useCategories } from "../../hooks/useCategories";
 import { getLocalStorage } from "../../utils";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 const options = {
   responsive: true,
+  scales: {
+    y: {
+      beginAtZero: true,
+    },
+  },
   plugins: {
     legend: {
       position: "top",
     },
     title: {
       display: true,
-      text: "Biểu đồ cột",
+      text: "Biểu đồ dạng tán",
     },
   },
 };
 
-export default function BarChart() {
+export default function ScatterChart() {
   const { categories, isLoading, fetchCategoriesFunc } = useCategories();
   const key = getLocalStorage("key").toString();
   const key2 = getLocalStorage("key2").toString();
@@ -46,12 +43,14 @@ export default function BarChart() {
     (item) => JSON.parse(item.objectJSON)[key2]
   );
   let data = {
-    labels,
     datasets: [
       {
-        label: `Giá trị của key: ${key}`,
-        data: rain,
-        backgroundColor: "#1890ff",
+        label: "Giá trị",
+        data: Array.from({ length: 100000 }, () => ({
+          x: rain,
+          y: labels,
+        })),
+        backgroundColor: "blue",
       },
     ],
   };
@@ -65,7 +64,7 @@ export default function BarChart() {
   return (
     <>
       {rain || labels ? (
-        <Bar
+        <Scatter
           options={options}
           data={data}
           fallbackContent={<>Chưa có dữ liệu từ API</>}

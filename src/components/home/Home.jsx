@@ -106,7 +106,8 @@ function Home() {
             Nhập url API để lấy được dữ liệu cần thiết
           </Button>
           <div className="exist-token">
-            url API đang được sử dụng là: {existAPI || "Chưa có token được lưu"}
+            url API đang được sử dụng là:{" "}
+            {existAPI || "Chưa có url API được lưu"}
           </div>
           <Divider></Divider>
           <Input
