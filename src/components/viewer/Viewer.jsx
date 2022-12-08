@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Empty, Popconfirm } from "antd";
+import { Button, Divider, Empty, Popconfirm, Row } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
@@ -49,7 +49,7 @@ function Viewer() {
         </Popconfirm>
       </div>
       <div className="viewer-content">
-        {value === "line" && <LineChart />}
+        {/* {value === "line" && <LineChart />}
         {value === "gauge" && <Power />}
         {value === "bar" && <BarChart />}
         {value === "pie" && <PieChart />}
@@ -58,7 +58,34 @@ function Viewer() {
           <>
             <Empty description="Chưa có dữ liệu hoặc quản trị viên chưa cài đặt giá trị được xem bởi user" />
           </>
-        )}
+        )} */}
+        <Divider />
+        <Row className="chart-item">
+          <LineChart />
+        </Row>
+        <Divider />
+
+        <Row className="chart-item">
+          <div className="gauge-header">
+            Biểu đồ dạng Gauge hiện thông số mới nhất
+          </div>
+          <Power />
+        </Row>
+        <Divider />
+
+        <Row className="chart-item">
+          <BarChart />
+        </Row>
+        <Divider />
+
+        <Row className="chart-item">
+          <PieChart />
+        </Row>
+        <Divider />
+
+        <Row className="chart-item">
+          <ScatterChart />
+        </Row>
       </div>
     </div>
   );

@@ -121,7 +121,7 @@ function Display() {
           >
             Xem
           </Button>
-          <Popconfirm
+          {/* <Popconfirm
             title={<div>Bạn có chắc chặn chọn {keyValue} để user xem</div>}
             onConfirm={onConfirm}
             okText="Chắc chắn"
@@ -134,7 +134,7 @@ function Display() {
             >
               Chọn dạng biểu đồ user được xem
             </Button>
-          </Popconfirm>
+          </Popconfirm> */}
         </div>
         <div className="charts">
           <Modal
