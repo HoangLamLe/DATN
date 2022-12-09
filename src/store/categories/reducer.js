@@ -21,6 +21,7 @@ const fetchCategoriesSuccess = (state, action) => ({
 const fetchCategoriesFailure = (state, action) => ({
   ...state,
   error: action.payload,
+  isLoading: false,
 });
 
 export default createReducer(initialState, {

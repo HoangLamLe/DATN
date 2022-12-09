@@ -42,7 +42,7 @@ export default function ScatterChart() {
   const labels = categories?.data?.entries?.map(
     (item) => JSON.parse(item.objectJSON)[key2]
   );
-  const fakeData = Array.from({ length: rain.length }, (item, index) => ({
+  const fakeData = Array.from({ length: rain?.length }, (item, index) => ({
     y: rain[index],
     x: labels[index],
   }));

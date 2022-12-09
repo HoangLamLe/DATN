@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 
 import { useCategories } from "../../hooks/useCategories";
@@ -8,17 +9,27 @@ import "./GaugeChart.scss";
 
 export function Power() {
   const { categories, isLoading, fetchCategoriesFunc } = useCategories();
+  const [isHaveData, setIsHaveData] = useState(false);
+
+  console.log("categories", categories);
 
   const key = getLocalStorage("key").toString();
-  console.log("key", key, typeof key);
+
   const rain = categories?.data?.entries?.map(
     (item) => JSON.parse(item.objectJSON)[key]
   );
-  console.log("rain in gauge", rain);
+
+  console.log("rain", rain);
+
+  useEffect(() => {
+    if (rain && key) {
+      setIsHaveData(true);
+    }
+  }, [rain, key]);
 
   return (
     <div className="gauge-container">
-      {rain[0] ? (
+      {isHaveData ? (
         <ReactSpeedometer
           width={400}
           height={250}
@@ -32,7 +43,7 @@ export function Power() {
           currentValueText={"Giá trị mới nhất : ${value} "}
         />
       ) : (
-        <>Không có dữ liệu từ API ! Hãy nhập đúng key</>
+        <>Không có dữ liệu từ API ! Hãy nhập đúng key và API cũng như Token</>
       )}
     </div>
   );
