@@ -36,7 +36,18 @@ export default function PieChart() {
       {
         label: `Giá trị của key: ${key}`,
         data: rain,
-        backgroundColor: "#1890ff",
+        backgroundColor: [
+          "red",
+          "green",
+          "blue",
+          "magenta",
+          "purple",
+          "orange",
+          "yellow",
+          "rose",
+          "pink",
+          "azure",
+        ],
       },
     ],
   };
